@@ -3,6 +3,7 @@
 import React from "react"
 
 export const BackgroundBlur = ({ children } : { children : React.ReactNode }) => {
+
     return (
         <div className="min-h-screen w-full relative bg-white">
             <div
