@@ -10,7 +10,7 @@ export const Dock = () => {
 
     return (
         <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-50">
-            <div className="bg-teal-700/60 w-full h-1/2 absolute rounded-full blur-lg top-7" />
+            <div className="bg-blue-800/60 w-full h-1/2 absolute rounded-full blur-lg top-7" />
             <motion.div 
                 className="flex flex-row items-center gap-3 px-3 py-2 border border-zinc-300 bg-white/70 backdrop-blur-md rounded-full shadow-xl"
                 whileHover={{ scale: 1.05 }}
