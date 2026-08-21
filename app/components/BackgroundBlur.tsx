@@ -1,14 +1,26 @@
 "use client";
 
-import { motion } from "framer-motion"
+import React from "react"
 
-export const BackgroundBlur = () => {
+export const BackgroundBlur = ({ children } : { children : React.ReactNode }) => {
     return (
-        <motion.div
-            style={{
-                width: 100,
-                height: 90,
-            }}
-        />
+        <div className="min-h-screen w-full relative bg-white">
+            <div
+                className="absolute inset-0 z-0"
+                style={{
+                background: "#ffffff",
+                backgroundImage: `
+                    radial-gradient(
+                    circle at top center,
+                    rgba(56, 193, 182, 0.5),
+                    transparent 50%
+                    )
+                `,
+                filter: "blur(80px)",
+                backgroundRepeat: "no-repeat",
+                }}
+            />
+                {children}
+            </div>
     )
 }
