@@ -5,7 +5,7 @@ import React from "react"
 export const BackgroundBlur = ({ children } : { children : React.ReactNode }) => {
 
     return (
-        <div className="min-h-screen w-full relative bg-white">
+        <div className="min-h-screen w-full relative bg-white dark:bg-zinc-900">
             <div
                 className="absolute inset-0 z-0 animate-pulse"
                 style={{
