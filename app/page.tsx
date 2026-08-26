@@ -1,28 +1,29 @@
 "use client";
 
 import { CustomContainer } from "@/components/CustomContainer";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Home() {
 
   const [response, setResponse] = useState<string>("Cargando datos...");
 
-  useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/meter');
-        //const json = await res.json();
-        //setResponse(JSON.stringify(json.data[0].mensaje, null, 2));
+        const res = await fetch("/api/meter", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ mensaje: "Hola desde el cliente" }),
+        });
+        const json = await res.json();
+        setResponse(JSON.stringify(json.data.mesaje, null, 2));
         console.log(res)
-      } catch (err) {
-        console.error(err);
-        setResponse("Error al cargar los datos");
-      }
-    };
-
-    fetchData();
-  }, []);
-
+    } catch (err) {
+      console.error(err);
+      setResponse("Error al cargar los datos");
+    }
+  };
 
   return (
     <div>
@@ -31,14 +32,13 @@ export default function Home() {
           <h1 className="text-zinc-700 font-bold text-5xl">Mi punto de venta</h1>
           <div className="w-32 h-32 rounded-full bg-zinc-900/20 flex justify-center items-center"><h1 className="text-8xl font-bold text-black/20 rotate-45">C</h1></div>
         </div>
-        <h1 className="text-2xl text-black">{response}</h1>
+        <h1>{response}</h1>
         <div className="flex flex-row">
           <CustomContainer w={80} bigg={true} />
           <CustomContainer w={20} bigg={true} />
         </div>
         <div className="flex flex-row">
-          <CustomContainer w={80} bigg={true} />
-          <CustomContainer w={20} bigg={true} />
+          <button onClick={() => fetchData()} className="w-32 h-16 bg-zinc-900/20 rounded-2xl text-zinc-700 text-2xl">Enviar</button>
         </div>
       </main>
     </div>

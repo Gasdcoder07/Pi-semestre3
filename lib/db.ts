@@ -13,7 +13,8 @@ export const pool = globalForPg.pgPool ??
         connectionString: process.env.DATABASE_URL,
         max: 10,
         idleTimeoutMillis: 30000,
-        ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined
+        ssl: { rejectUnauthorized: false }
+        //ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined
     })
 
 if (process.env.NODE_ENV !== 'production') {

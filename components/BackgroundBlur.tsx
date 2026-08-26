@@ -20,7 +20,7 @@ export const BackgroundBlur = ({ children }: { children: React.ReactNode }) => {
           backgroundRepeat: "no-repeat",
         }}
       />
-      <div className="relative z-10 w-full h-full px-40 py-20">
+      <div className="relative z-10 w-full h-full px-30 py-20">
         {children}
       </div>
     </div>
