@@ -10,9 +10,10 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/prueba');
-        const json = await res.json();
-        setResponse(JSON.stringify(json.data[0].mensaje, null, 2));
+        const res = await fetch('http://localhost:3000/api/meter');
+        //const json = await res.json();
+        //setResponse(JSON.stringify(json.data[0].mensaje, null, 2));
+        console.log(res)
       } catch (err) {
         console.error(err);
         setResponse("Error al cargar los datos");
