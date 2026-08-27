@@ -34,11 +34,12 @@ export default function Home() {
         </div>
         <h1>{response}</h1>
         <div className="flex flex-row">
-          <CustomContainer w={80} bigg={true} />
-          <CustomContainer w={20} bigg={true} />
+          <CustomContainer w={50} bigg={true} />
+          <CustomContainer w={30} bigg={true} />
         </div>
-        <div className="flex flex-row">
-          <button onClick={() => fetchData()} className="w-32 h-16 bg-zinc-900/20 rounded-2xl text-zinc-700 text-2xl">Enviar</button>
+        <div className="flex flex-col py-20">
+          <h2 className="text-base font-semibold">Este botón solo es una prueba para la API, método POST</h2>
+          <button onClick={() => fetchData()} className="w-32 h-16 bg-zinc-900/20 rounded-2xl text-zinc-700 text-2xl hover:scale-120 transition-all">Enviar</button>
         </div>
       </main>
     </div>
