@@ -27,10 +27,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        <BackgroundBlur>
-          <Dock />
+        {/*<BackgroundBlur>*/}
+          {/*<Dock />*/}
           {children}
-        </BackgroundBlur>
+        {/*</BackgroundBlur>*/}
         </body>
     </html>
   );
