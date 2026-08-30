@@ -1,20 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-export default function TestRegister() {
+export default function TestLogin() {
   const [formData, setFormData] = useState({
-    nombre: "",
     correo: "",
     password: "",
-    rol_id: "",
-    sucursal_id: "",
   });
   const [response, setResponse] = useState<string | null>(null);
-
-  useEffect(() => {
-    console.log(formData)
-  }, [formData])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -25,15 +18,10 @@ export default function TestRegister() {
     setResponse("Cargando...");
 
     try {
-
-      const res = await fetch("/api/auth/register", {
+      const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formData,
-          rol_id: Number(formData.rol_id),
-          sucursal_id: formData.sucursal_id ? Number(formData.sucursal_id) : undefined,
-        }),
+        body: JSON.stringify(formData),
       });
 
       const data = await res.json();
@@ -45,16 +33,9 @@ export default function TestRegister() {
 
   return (
     <div className="max-w-md mx-auto p-6 mt-10 border rounded-lg shadow-sm">
-      <h1 className="text-xl font-bold mb-4">Probar Registro</h1>
+      <h1 className="text-xl font-bold mb-4">Probar Login</h1>
       
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <input
-          name="nombre"
-          placeholder="Nombre"
-          onChange={handleChange}
-          required
-          className="p-2 border rounded text-black"
-        />
         <input
           name="correo"
           type="email"
@@ -65,30 +46,15 @@ export default function TestRegister() {
         />
         <input
           name="password"
-          type="text"
+          type="password"
           placeholder="Contraseña"
           onChange={handleChange}
           required
           className="p-2 border rounded text-black"
         />
-        <input
-          name="rol_id"
-          type="number"
-          placeholder="ID del Rol"
-          onChange={handleChange}
-          required
-          className="p-2 border rounded text-black"
-        />
-        <input
-          name="sucursal_id"
-          type="number"
-          placeholder="ID de Sucursal (Opcional)"
-          onChange={handleChange}
-          className="p-2 border rounded text-black"
-        />
         
-        <button type="submit" className="p-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-          Registrar Usuario
+        <button type="submit" className="p-2 bg-green-600 text-white rounded hover:bg-green-700">
+          Iniciar Sesión
         </button>
       </form>
 
