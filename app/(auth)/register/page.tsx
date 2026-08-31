@@ -1,26 +1,26 @@
 import { Metadata } from "next";
 import Image from "next/image";
-import LoginForm from "@/components/LoginForm";
+import LoginForm from "@/components/RegisterForm";
 
 export const metadata : Metadata = {
     title : "Pacífico - Autenticación",
-    description : "Inicia sesión"
+    description : "Registro de usuario"
 }
 
 const page = () => {
     return (
         <div className="w-full h-full flex">
-            <div className="relative w-full md:w-1/2 p-12">
+            <div className="w-full md:w-1/2 p-12 flex flex-col">
                 <img
                     src="/pacifico-logo-horizontal.svg"
                     alt="Logo Pacífico"
-                    className="absolute top-6 left-6 h-16"/>
+                    className="h-16"/>
 
-                <div className="max-w-md mx-auto h-full flex flex-col justify-center items-center gap-6">
+                <div className="flex-1 max-w-md mx-auto w-full flex flex-col justify-center items-center gap-6">
                     <div className="text-center flex flex-col gap-2">
-                        <h3 className="text-3xl font-semibold">Welcome back</h3>
+                        <h3 className="text-3xl font-semibold">Welcome to Pacifico</h3>
 
-                        <p className="text-sm text-neutral-600 leading-relaxed">Enter your email and password to access your acount.</p>
+                        <p className="text-sm text-neutral-600 leading-relaxed">Create your account and enjoy the benefits</p>
                     </div>
 
                     <LoginForm/>
@@ -39,7 +39,7 @@ const page = () => {
                 <div className="absolute top-1/2 -translate-y-1/2 left-6 lg:left-12 text-white p-2 flex flex-col gap-2">
                     <h3 className="text-3xl leading-relaxed">Administra tus ventas e inventario sin esfuerzo.</h3>
 
-                    <p className="max-w-2xl leading-relaxed">Inicia sesión para gestionar tus sucursales en tiempo real.</p>
+                    <p className="max-w-2xl leading-relaxed">Crea tu cuenta y lleva tu gestion de ventas a otro nivel.</p>
                 </div>
             </div>
         </div>
