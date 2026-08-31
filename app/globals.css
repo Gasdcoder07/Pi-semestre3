@@ -127,7 +127,29 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-@layer base {
+@@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+
+  input[type="date"]::-webkit-datetime-edit {
+    color: var(--muted-foreground);
+    opacity: 0.6;
+  }
+
+  input[type="date"]:valid::-webkit-datetime-edit {
+    color: var(--foreground);
+    opacity: 1;
+  }
+
+}
+layer base {
   * {
     @apply border-border outline-ring/50;
   }

@@ -1,102 +1,147 @@
 "use client"
 
-import { Eye, EyeOff } from "lucide-react";
-import Link from "next/link";
 import { useState } from "react";
 
-const RegisterForm = () => {
-    // Estado para controlar las contraseñas
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+type FormData = {
+    nombre: string;
+    apellidos: string;
+    fechaNacimiento: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+};
 
-    // Manejar formulario de registro
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+const STEPS = ["Datos personales", "Credenciales", "Confirmación"];
+
+const RegisterForm = () => {
+    const [step, setStep] = useState(0);
+    const [formData, setFormData] = useState<FormData>({
+        nombre: "",
+        apellidos: "",
+        fechaNacimiento: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+    });
+
+    const updateField = (field: keyof FormData, value: string) => {
+        setFormData((prev) => ({ ...prev, [field]: value }));
+    };
+
+    const nextStep = () => setStep((s) => Math.min(s + 1, STEPS.length - 1));
+    const prevStep = () => setStep((s) => Math.max(s - 1, 0));
+
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-    }
+        console.log(formData);
+    };
 
     return (
-        <form
-            onSubmit={handleSubmit}
-            className="flex flex-col gap-4 w-full">
+        <form onSubmit={step === STEPS.length - 1 ? handleSubmit : (e) => e.preventDefault()} className="flex flex-col gap-4 w-full">
+            <div className="flex justify-between mb-2">
+                {STEPS.map((label, i) => (
+                    <div key={label} className="flex-1 flex flex-col items-center gap-1">
+                        <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-semibold
+                            ${i <= step ? "bg-cyan-600 text-white" : "bg-neutral-200 text-neutral-500"}`}>
+                            {i + 1}
+                        </div>
+                        <span className="text-[10px] text-neutral-500 text-center">{label}</span>
+                    </div>
+                ))}
+            </div>
 
-                <div className="flex flex-col gap-2">
-                    <label htmlFor="name" className="text-sm">Nombre completo</label>
-
-                    <input
-                        id="name"
-                        type="text"
-                        name="name"
-                        required
-                        suppressHydrationWarning
-                        className="w-full p-3 text-sm border border-neutral-300 rounded-xl outline-none transition-all duration-200 ease-in-out hover:border-neutral-400"/>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                    <label htmlFor="email" className="text-sm">Email</label>
-
-                    <input
-                        id="email"
-                        type="email"
-                        name="email"
-                        required
-                        suppressHydrationWarning
-                        className="w-full p-3 text-sm border border-neutral-300 rounded-xl outline-none transition-all duration-200 ease-in-out hover:border-neutral-400"/>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                    <label htmlFor="password" className="text-sm">Password</label>
-
-                    <div className="relative">
+            {step === 0 && (
+                <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-sm">Nombre</label>
                         <input
-                            id="password"
-                            type={showPassword ? 'text' : 'password'}
-                            name="password"
+                            value={formData.nombre}
+                            onChange={(e) => updateField("nombre", e.target.value)}
                             required
                             suppressHydrationWarning
-                            className="w-full p-3 pr-12 text-sm border border-neutral-300 rounded-xl outline-none transition-all duration-200 ease-in-out hover:border-neutral-400"/>
-
-                        <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            suppressHydrationWarning
-                            className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-neutral-400"
-                            aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}>
-                            {showPassword ? <EyeOff size={20}/> : <Eye size={20}/>}
-                        </button>
+                            className="w-full p-2.5 text-sm border border-neutral-300 rounded-xl outline-none"/>
                     </div>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                    <label htmlFor="confirmPassword" className="text-sm">Confirm password</label>
-
-                    <div className="relative">
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-sm">Apellidos</label>
                         <input
-                            id="confirmPassword"
-                            type={showConfirmPassword ? 'text' : 'password'}
-                            name="confirmPassword"
+                            value={formData.apellidos}
+                            onChange={(e) => updateField("apellidos", e.target.value)}
                             required
                             suppressHydrationWarning
-                            className="w-full p-3 pr-12 text-sm border border-neutral-300 rounded-xl outline-none transition-all duration-200 ease-in-out hover:border-neutral-400"/>
-
-                        <button
-                            type="button"
-                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                            className="w-full p-2.5 text-sm border border-neutral-300 rounded-xl outline-none"/>
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-sm">Fecha de nacimiento</label>
+                        <input
+                            type="date"
+                            value={formData.fechaNacimiento}
+                            onChange={(e) => updateField("fechaNacimiento", e.target.value)}
+                            required
                             suppressHydrationWarning
-                            className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-neutral-400"
-                            aria-label={showConfirmPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}>
-                            {showConfirmPassword ? <EyeOff size={20}/> : <Eye size={20}/>}
-                        </button>
+                            className="w-full p-2.5 text-sm border border-neutral-300 rounded-xl outline-none"/>
                     </div>
                 </div>
+            )}
 
-                <div className="mt-4 flex flex-col gap-4">
-                    <button
-                        type="submit"
-                        suppressHydrationWarning
-                        className="font-semibold text-white bg-cyan-600 hover:bg-cyan-500 w-full py-3 rounded-xl transition-colors ease-in-out duration-200 cursor-pointer">Register</button>
-
-                    <span className="text-neutral-600 text-center text-sm">Already Have An Account? <Link href="/login" className="font-semibold text-cyan-600 hover:text-cyan-500 ease-in-out duration-200 transition-colors">Log in.</Link></span>
+            {step === 1 && (
+                <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-sm">Email</label>
+                        <input
+                            type="email"
+                            value={formData.email}
+                            onChange={(e) => updateField("email", e.target.value)}
+                            required
+                            suppressHydrationWarning
+                            className="w-full p-2.5 text-sm border border-neutral-300 rounded-xl outline-none"/>
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-sm">Password</label>
+                        <input
+                            type="password"
+                            value={formData.password}
+                            onChange={(e) => updateField("password", e.target.value)}
+                            required
+                            suppressHydrationWarning
+                            className="w-full p-2.5 text-sm border border-neutral-300 rounded-xl outline-none"/>
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                        <label className="text-sm">Confirmar password</label>
+                        <input
+                            type="password"
+                            value={formData.confirmPassword}
+                            onChange={(e) => updateField("confirmPassword", e.target.value)}
+                            required
+                            suppressHydrationWarning
+                            className="w-full p-2.5 text-sm border border-neutral-300 rounded-xl outline-none"/>
+                    </div>
                 </div>
+            )}
+
+            {step === 2 && (
+                <div className="flex flex-col gap-2 text-sm text-neutral-600">
+                    <p><strong>Nombre:</strong> {formData.nombre} {formData.apellidos}</p>
+                    <p><strong>Fecha de nacimiento:</strong> {formData.fechaNacimiento}</p>
+                    <p><strong>Email:</strong> {formData.email}</p>
+                </div>
+            )}
+
+            <div className="flex gap-3 mt-2">
+                {step > 0 && (
+                    <button type="button" onClick={prevStep} suppressHydrationWarning className="flex-1 py-2.5 rounded-xl border border-neutral-300 text-sm font-semibold">
+                        Atrás
+                    </button>
+                )}
+                {step < STEPS.length - 1 ? (
+                    <button type="button" onClick={nextStep} suppressHydrationWarning className="flex-1 py-2.5 rounded-xl bg-cyan-600 text-white text-sm font-semibold">
+                        Siguiente
+                    </button>
+                ) : (
+                    <button type="submit" suppressHydrationWarning className="flex-1 py-2.5 rounded-xl bg-cyan-600 text-white text-sm font-semibold">
+                        Crear cuenta
+                    </button>
+                )}
+            </div>
         </form>
     );
 };
