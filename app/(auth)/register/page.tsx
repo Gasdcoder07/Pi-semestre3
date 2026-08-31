@@ -9,16 +9,17 @@ export const metadata : Metadata = {
 
 const page = () => {
     return (
-        <div className="w-full h-full flex">
-            <div className="w-full md:w-1/2 p-12 flex flex-col">
+        <div className="w-full h-screen flex overflow-y-auto">
+            <div className="w-full md:w-1/2 p-6 md:p-8 flex flex-col">
                 <img
                     src="/pacifico-logo-horizontal.svg"
                     alt="Logo Pacífico"
-                    className="h-16"/>
+                    className="absolute top-6 left-6 h-16"/>
 
-                <div className="flex-1 max-w-md mx-auto w-full flex flex-col justify-center items-center gap-6">
-                    <div className="text-center flex flex-col gap-2">
-                        <h3 className="text-3xl font-semibold">Welcome to Pacifico</h3>
+
+                <div className="flex-1 max-w-md mx-auto w-full flex flex-col justify-center items-center gap-4 py-4">
+                    <div className="text-center flex flex-col gap-1">
+                        <h3 className="text-2xl font-semibold">Welcome to Pacifico</h3>
 
                         <p className="text-sm text-neutral-600 leading-relaxed">Create your account and enjoy the benefits</p>
                     </div>
