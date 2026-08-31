@@ -19,20 +19,30 @@ export async function POST(request: Request) {
 
         if (authError || !authData) {
             return NextResponse.json(
-                { error: "Correo o contraseña incorrectos" },
+                {   error: authError?.message,
+                    code: authError?.code,
+                    status: authError?.status },
                 { status: 401 }
             )
         }
 
+        if (!authData?.user) {
+            return NextResponse.json(
+                {error: "Supabase no devolvió un usuario autenticado"},
+                { status: 401 }
+            );
+        }
         const { data: perfilUsuario, error: perfilError } = await supabase
             .from('usuarios')
             .select('id, nombre, correo, rol_id, sucursal_id, estado')
             .eq('auth_user_id', authData.user.id)
             .single();
 
+        console.log('Perfil del usuario obtenido: ', perfilUsuario, 'Error al obtener el perfil: ', perfilError)
+
         if (perfilError || !perfilUsuario) {
             return NextResponse.json(
-                { error: 'No se encontró el perfil en la base de datos' },
+                { error: 'No se encontró el perfil en la base de datos', detalle: perfilError?.message || 'Perfil no encontrado' },
                 { status: 404 }
             )
         }
@@ -45,15 +55,10 @@ export async function POST(request: Request) {
         }
 
         return NextResponse.json(
-            {
-                message: 'Login exitoso',
-                session: authData.session,
-                usuario: perfilUsuario
-            }, { 
-                status: 200 
-            }
+            {message: 'Login exitoso', session: authData.session, usuario: perfilUsuario}, 
+                {status: 200}
         )
-
+        
     } catch(err) {
         console.error('Error en el endpoint de login: ', err)
         return NextResponse.json(

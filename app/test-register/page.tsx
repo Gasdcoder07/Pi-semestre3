@@ -12,10 +12,6 @@ export default function TestRegister() {
   });
   const [response, setResponse] = useState<string | null>(null);
 
-  useEffect(() => {
-    console.log(formData)
-  }, [formData])
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
