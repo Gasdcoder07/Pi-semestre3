@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Image from "next/image";
+import LoginForm from "@/components/LoginForm";
 
 export const metadata : Metadata = {
     title : "Pacífico - Autenticación",
@@ -11,20 +12,18 @@ const page = () => {
         <div className="w-full h-full flex">
             <div className="relative w-full md:w-1/2 p-12">
                 <img
-                    src="/pacifico-logo.svg"
+                    src="/pacifico-logo-horizontal.svg"
                     alt="Logo Pacífico"
-                    className="absolute top-6 left-6 h-14"/>
+                    className="absolute top-6 left-6 h-16"/>
 
-                <div className="h-full flex flex-col justify-center items-center gap-6">
+                <div className="max-w-md mx-auto h-full flex flex-col justify-center items-center gap-6">
                     <div className="text-center flex flex-col gap-2">
                         <h3 className="text-3xl font-semibold">Welcome back</h3>
 
-                        <span className="text-sm text-neutral-600 leading-relaxed">Enter your email and password to access your acount.</span>
+                        <p className="text-sm text-neutral-600 leading-relaxed">Enter your email and password to access your acount.</p>
                     </div>
 
-                    <div>
-
-                    </div>
+                    <LoginForm/>
                 </div>
             </div>
 
@@ -36,6 +35,12 @@ const page = () => {
                     className="object-cover"
                     priority
                     quality={75}/>
+
+                <div className="absolute top-1/2 -translate-y-1/2 left-6 lg:left-12 text-white p-2 flex flex-col gap-2">
+                    <h3 className="text-3xl leading-relaxed">Administra tus ventas e inventario sin esfuerzo.</h3>
+
+                    <p className="max-w-2xl leading-relaxed">Inicia sesión para gestionar tus sucursales en tiempo real.</p>
+                </div>
             </div>
         </div>
     );
