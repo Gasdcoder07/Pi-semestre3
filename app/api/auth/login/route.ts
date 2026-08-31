@@ -1,6 +1,122 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 
+/**
+ * @swagger
+ * /api/auth/login:
+ *   post:
+ *     summary: Iniciar sesión
+ *     description: Autentica al usuario mediante Supabase Auth y recupera la información de su perfil desde la tabla usuarios.
+ *     tags:
+ *       - Autenticación
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - correo
+ *               - password
+ *             properties:
+ *               correo:
+ *                 type: string
+ *                 format: email
+ *                 example: usuario@empresa.com
+ *                 description: Correo electrónico del usuario
+ *               password:
+ *                 type: string
+ *                 format: password
+ *                 example: "MiPassword123"
+ *                 description: Contraseña de la cuenta
+ *     responses:
+ *       200:
+ *         description: Login exitoso. Devuelve la sesión de Supabase y el perfil del usuario.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Login exitoso
+ *                 session:
+ *                   type: object
+ *                   description: Objeto de sesión de Supabase Auth
+ *                 usuario:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                       format: uuid
+ *                     nombre:
+ *                       type: string
+ *                     correo:
+ *                       type: string
+ *                     rol_id:
+ *                       type: string
+ *                     sucursal_id:
+ *                       type: string
+ *                     estado:
+ *                       type: boolean
+ *       400:
+ *         description: Bad Request. Faltan el correo o la contraseña en el body.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Error, hace faltan datos para poder entrar ( Usuario, Contraseña )"
+ *       401:
+ *         description: Unauthorized. Credenciales inválidas o error en Supabase Auth.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Invalid login credentials"
+ *                 code:
+ *                   type: string
+ *                 status:
+ *                   type: integer
+ *       403:
+ *         description: Forbidden. La cuenta del usuario está inactiva.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "La cuenta del usuario está inactiva"
+ *       404:
+ *         description: Not Found. El usuario se autenticó pero no existe su perfil en la tabla 'usuarios'.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "No se encontró el perfil en la base de datos"
+ *                 detalle:
+ *                   type: string
+ *       500:
+ *         description: Internal Server Error. Fallo inesperado en el servidor.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                 status:
+ *                   type: integer
+ */
 export async function POST(request: Request) {
     try {
         const { correo, password } = await request.json()
