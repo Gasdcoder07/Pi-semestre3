@@ -29,7 +29,7 @@ const LoginForm = () => {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="password" className="text-sm">Password</label>
+                    <label htmlFor="password" className="text-sm">Contraseña</label>
 
                     <div className="relative">  
                         <input
@@ -52,15 +52,15 @@ const LoginForm = () => {
                         <Link
                             href="forgot-password"
                             className="font-semibold text-sm text-cyan-600 hover:text-cyan-500 ease-in-out duration-200 transition-colors">
-                            Forgot your password?
+                            ¿Olvidaste tu contraseña?
                         </Link>
                     </div>
                 </div>
 
                 <div className="mt-4 flex flex-col gap-4">
-                    <button type="submit" className="font-semibold text-white bg-cyan-600 hover:bg-cyan-500 w-full py-3 rounded-xl transition-colors ease-in-out duration-200 cursor-pointer">Log in</button>
-                    
-                    <span className="text-neutral-600 text-center text-sm">Don't Have An Account? <Link href="/register" className="font-semibold text-cyan-600 hover:text-cyan-500 ease-in-out duration-200 transition-colors">Register Now.</Link></span>
+                    <button type="submit" className="font-semibold text-white bg-cyan-600 hover:bg-cyan-500 w-full py-3 rounded-xl transition-colors ease-in-out duration-200 cursor-pointer">Iniciar sesión</button>
+
+                    <span className="text-neutral-600 text-center text-sm">¿No tienes una cuenta? <Link href="/register" className="font-semibold text-cyan-600 hover:text-cyan-500 ease-in-out duration-200 transition-colors">Regístrate ahora.</Link></span>
                 </div>
         </form>
     );
