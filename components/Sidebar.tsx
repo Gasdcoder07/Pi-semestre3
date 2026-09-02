@@ -1,7 +1,7 @@
 "use client";
 
 import { sidebarNavigation } from "@/config/navigation";
-import { ChevronsRight, LucideIcon } from "lucide-react";
+import { ChevronsRight, LogOut, LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -13,11 +13,9 @@ const Sidebar = () => {
     return (
         <aside
             className={`${isOpen ? 'w-56' : 'w-fit'} p-4 flex flex-col justify-between gap-4 border-r border-neutral-300`}>
-            <div className="flex-1 flex flex-col gap-4">
-                <TitleSection open={isOpen}/>
-
+            <div className="flex-1 flex flex-col justify-between">
                 <ul
-                    className="flex flex-col">
+                    className="flex flex-col gap-4">
                     {
                         sidebarNavigation.map((item) => {
                             const isActive = pathname.includes(item.href);
@@ -34,6 +32,8 @@ const Sidebar = () => {
                         })
                     }
                 </ul>
+
+                <LogoutButton open={isOpen}/>
             </div>
                     
             <ToggleClose open={isOpen} setIsOpen={setIsOpen}/>
@@ -42,28 +42,6 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
-interface TitleSectionProps {
-    open : boolean;
-}
-
-const TitleSection = ({ open } : TitleSectionProps) => {
-    return (
-        <div
-            className="flex items-center gap-4 pb-4 border-b border-neutral-300">
-            <img
-                src="https://rhpositivo.mx/media/k2/items/cache/9a0d2f73e0452792d0544ef4022ea343_XL.jpg"
-                className="size-14 rounded-md shrink-0 object-cover"
-                alt="Sucursal" />
-
-            {
-                open && (
-                    <p className="text-sm font-medium whitespace-nowrap">Sucursal 1</p>
-                )
-            }
-        </div>
-    )
-}
 
 interface SidebarOptionProps {
     open : boolean;
@@ -79,7 +57,7 @@ const SidebarOption = ({ open, name, href, icon : Icon, isSelected } : SidebarOp
             <Link
                 href={href}
                 title={!open ? name : undefined}
-                className={`${isSelected ? 'bg-[#BFF2FF] text-[#007999]' : 'text-neutral-500'} flex items-center gap-4 p-4 rounded-md transition-colors duration-200 ease-in-out hover:bg-[#E5FAFF] hover:text-[#007999]`}>
+                className={`${isSelected ? 'bg-linear-to-b from-brand-50 to-brand-100 text-brand-700' : 'text-neutral-500'} flex items-center gap-4 px-4 py-3 rounded-md transition-colors duration-200 ease-in-out hover:bg-linear-to-b from-brand-50 to-brand-100 hover:text-brand-700`}>
                 <Icon className="shrink-0"/>
 
                 {
@@ -102,7 +80,7 @@ const ToggleClose = ({ open, setIsOpen } : ToggleCloseProps) => {
         <div className="border-t border-neutral-300 pt-4">
             <button
                 onClick={() => setIsOpen(!open)}
-                className="w-full flex items-center p-4 gap-2 rounded-md transition-all duration-200 ease-in-out hover:bg-[#E5FAFF] hover:text-[#007999] cursor-pointer">
+                className="w-full flex items-center px-4 py-3 gap-4 rounded-md transition-all duration-200 ease-in-out hover:bg-linear-to-b from-brand-50 to-brand-100 hover:text-brand-700 cursor-pointer">
                 <ChevronsRight className={`transition-transform ${open && 'rotate-180'} shrink-0`}/>
 
                 {
@@ -112,5 +90,22 @@ const ToggleClose = ({ open, setIsOpen } : ToggleCloseProps) => {
                 }
             </button>
         </div>
+    )
+}
+
+interface LogoutButtonProps {
+    open : boolean
+}
+
+const LogoutButton = ({ open } : LogoutButtonProps) => {
+    return (
+        <button className="text-neutral-500 flex items-center gap-4 px-4 py-3 rounded-md transition-colors duration-200 ease-in-out hover:bg-linear-to-b from-brand-50 to-brand-100 hover:text-brand-700 cursor-pointer">
+            <LogOut className="shrink-0"/>
+            {
+                open && (
+                    <span className="text-sm font-medium">Logout</span>
+                )
+            }
+        </button>
     )
 }
