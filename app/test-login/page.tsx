@@ -17,6 +17,8 @@ export default function TestLogin() {
     e.preventDefault();
     setResponse("Cargando...");
 
+    console.log("Enviando datos de login:", formData);
+
     try {
       const res = await fetch("/api/auth/login", {
         method: "POST",

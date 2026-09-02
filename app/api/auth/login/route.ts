@@ -130,7 +130,7 @@ export async function POST(request: Request) {
 
         const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
             email: correo,
-            password: password
+            password
         })
 
         if (authError || !authData) {
@@ -141,16 +141,9 @@ export async function POST(request: Request) {
                 { status: 401 }
             )
         }
-
-        if (!authData?.user) {
-            return NextResponse.json(
-                {error: "Supabase no devolvió un usuario autenticado"},
-                { status: 401 }
-            );
-        }
         const { data: perfilUsuario, error: perfilError } = await supabase
             .from('usuarios')
-            .select('id, nombre, correo, rol_id, sucursal_id, estado')
+            .select('id, nombre,apellido,nombre_usuario, correo, rol_id, sucursal_id, estado')
             .eq('auth_user_id', authData.user.id)
             .single();
 
