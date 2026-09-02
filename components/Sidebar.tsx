@@ -17,7 +17,7 @@ const Sidebar = () => {
                 <TitleSection open={isOpen}/>
 
                 <ul
-                    className="flex flex-col">
+                    className="flex flex-col gap-4">
                     {
                         sidebarNavigation.map((item) => {
                             const isActive = pathname.includes(item.href);
@@ -52,13 +52,16 @@ const TitleSection = ({ open } : TitleSectionProps) => {
         <div
             className="flex items-center gap-4 pb-4 border-b border-neutral-300">
             <img
-                src="https://rhpositivo.mx/media/k2/items/cache/9a0d2f73e0452792d0544ef4022ea343_XL.jpg"
+                src="/pacifico-logo.svg"
                 className="size-14 rounded-md shrink-0 object-cover"
                 alt="Sucursal" />
 
             {
                 open && (
-                    <p className="text-sm font-medium whitespace-nowrap">Sucursal 1</p>
+                    <div className="flex flex-col">
+                        <p className="text-neutral-500 text-xs font-medium whitespace-nowrap">Sucursal</p>
+                        <p className="text-sm font-semibold whitespace-nowrap">Las Brisas</p>
+                    </div>
                 )
             }
         </div>
@@ -79,7 +82,7 @@ const SidebarOption = ({ open, name, href, icon : Icon, isSelected } : SidebarOp
             <Link
                 href={href}
                 title={!open ? name : undefined}
-                className={`${isSelected ? 'bg-[#BFF2FF] text-[#007999]' : 'text-neutral-500'} flex items-center gap-4 p-4 rounded-md transition-colors duration-200 ease-in-out hover:bg-[#E5FAFF] hover:text-[#007999]`}>
+                className={`${isSelected ? 'bg-linear-to-b from-brand-50 to-brand-100 text-brand-700' : 'text-neutral-500'} flex items-center gap-4 px-4 py-3 rounded-md transition-colors duration-200 ease-in-out hover:bg-linear-to-b from-brand-50 to-brand-100 hover:text-brand-700`}>
                 <Icon className="shrink-0"/>
 
                 {
@@ -102,7 +105,7 @@ const ToggleClose = ({ open, setIsOpen } : ToggleCloseProps) => {
         <div className="border-t border-neutral-300 pt-4">
             <button
                 onClick={() => setIsOpen(!open)}
-                className="w-full flex items-center p-4 gap-2 rounded-md transition-all duration-200 ease-in-out hover:bg-[#E5FAFF] hover:text-[#007999] cursor-pointer">
+                className="w-full flex items-center px-4 py-3 gap-4 rounded-md transition-all duration-200 ease-in-out hover:bg-linear-to-b from-brand-50 to-brand-100 hover:text-brand-700 cursor-pointer">
                 <ChevronsRight className={`transition-transform ${open && 'rotate-180'} shrink-0`}/>
 
                 {

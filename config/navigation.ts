@@ -1,4 +1,4 @@
-import { BadgeDollarSign, LayoutDashboard, Monitor, ShelvingUnit } from "lucide-react"
+import { BadgeDollarSign, LayoutDashboard, Monitor, Settings, ShelvingUnit } from "lucide-react"
 
 export type SidebarItem = {
     id : string,
@@ -26,5 +26,10 @@ export const sidebarNavigation : SidebarItem[] = [
         id : "Dashboard",
         href : "/dashboard",
         icon : LayoutDashboard
+    },
+    {
+        id : "Settings",
+        href : "/settings",
+        icon : Settings
     }
 ]
