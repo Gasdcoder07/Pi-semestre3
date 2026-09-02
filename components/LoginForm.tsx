@@ -3,10 +3,12 @@
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { LoadingIndicator } from "./LoadingIndicator";
 
 const LoginForm = () => {
     // Estado para controlar la contraseña
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setIsLoading] = useState(false)
 
     // Manejar formulario de login
     const handleSubmit = (e : React.SubmitEvent) => {
@@ -58,8 +60,17 @@ const LoginForm = () => {
                 </div>
 
                 <div className="mt-4 flex flex-col gap-4">
-                    <button type="submit" className="font-semibold text-white bg-cyan-600 hover:bg-cyan-500 w-full py-3 rounded-xl transition-colors ease-in-out duration-200 cursor-pointer">Iniciar sesión</button>
-
+                    <button 
+                        type="submit" 
+                        onClick={() => setIsLoading(!loading)} 
+                        className="font-semibold text-white bg-cyan-600 hover:bg-cyan-500 w-full py-3 rounded-xl transition-colors ease-in-out duration-200 cursor-pointer flex items-center justify-center"
+                    >
+                        {loading ? (
+                            <LoadingIndicator />
+                        ) : (
+                            <p>Iniciar sesión</p>  
+                        )}
+                    </button>
                     <span className="text-neutral-600 text-center text-sm">¿No tienes una cuenta? <Link href="/register" className="font-semibold text-cyan-600 hover:text-cyan-500 ease-in-out duration-200 transition-colors">Regístrate ahora.</Link></span>
                 </div>
         </form>

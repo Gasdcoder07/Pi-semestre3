@@ -26,22 +26,6 @@ const page = () => {
                     <LoginForm/>
                 </div>
             </div>
-{/*
-    greco
-janik
-membrilla
-kayleen
-abril
-sanchez
-vaca
-erik nava
-olivera
-lizama
-ruelas
-guzman
-frías
-radillo
-*/}
             <div className="relative hidden md:flex w-1/2 overflow-hidden rounded-xl">
                 <Image
                     src="/auth_image.webp"
