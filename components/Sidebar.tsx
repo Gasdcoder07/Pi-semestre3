@@ -1,7 +1,7 @@
 "use client";
 
 import { sidebarNavigation } from "@/config/navigation";
-import { ChevronsRight, LucideIcon } from "lucide-react";
+import { ChevronsRight, LogOut, LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -13,7 +13,7 @@ const Sidebar = () => {
     return (
         <aside
             className={`${isOpen ? 'w-56' : 'w-fit'} p-4 flex flex-col justify-between gap-4 border-r border-neutral-300`}>
-            <div className="flex-1 flex flex-col">
+            <div className="flex-1 flex flex-col justify-between">
                 <ul
                     className="flex flex-col gap-4">
                     {
@@ -32,6 +32,8 @@ const Sidebar = () => {
                         })
                     }
                 </ul>
+
+                <LogoutButton open={isOpen}/>
             </div>
                     
             <ToggleClose open={isOpen} setIsOpen={setIsOpen}/>
@@ -88,5 +90,22 @@ const ToggleClose = ({ open, setIsOpen } : ToggleCloseProps) => {
                 }
             </button>
         </div>
+    )
+}
+
+interface LogoutButtonProps {
+    open : boolean
+}
+
+const LogoutButton = ({ open } : LogoutButtonProps) => {
+    return (
+        <button className="text-neutral-500 flex items-center gap-4 px-4 py-3 rounded-md transition-colors duration-200 ease-in-out hover:bg-linear-to-b from-brand-50 to-brand-100 hover:text-brand-700 cursor-pointer">
+            <LogOut className="shrink-0"/>
+            {
+                open && (
+                    <span className="text-sm font-medium">Logout</span>
+                )
+            }
+        </button>
     )
 }
