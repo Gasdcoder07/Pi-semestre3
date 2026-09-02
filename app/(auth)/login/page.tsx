@@ -26,7 +26,22 @@ const page = () => {
                     <LoginForm/>
                 </div>
             </div>
-
+{/*
+    greco
+janik
+membrilla
+kayleen
+abril
+sanchez
+vaca
+erik nava
+olivera
+lizama
+ruelas
+guzman
+frías
+radillo
+*/}
             <div className="relative hidden md:flex w-1/2 overflow-hidden rounded-xl">
                 <Image
                     src="/auth_image.webp"
@@ -34,7 +49,9 @@ const page = () => {
                     fill
                     className="object-cover"
                     priority
-                    quality={75}/>
+                    sizes="1080px"
+                    quality={75}
+                />
 
                 <div className="absolute top-1/2 -translate-y-1/2 left-6 lg:left-12 text-white p-2 flex flex-col gap-2">
                     <h3 className="text-3xl leading-relaxed">Administra tus ventas e inventario facil.</h3>
