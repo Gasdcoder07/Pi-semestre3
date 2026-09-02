@@ -5,14 +5,21 @@ import { ChevronsRight, LogOut, LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Dispatch, SetStateAction, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(true);
     const pathname = usePathname();
 
     return (
-        <aside
-            className={`${isOpen ? 'w-56' : 'w-fit'} p-4 flex flex-col justify-between gap-4 border-r border-neutral-300`}>
+        <motion.aside
+            initial={false}
+            animate={ { width: isOpen ? 256 : 88 } }
+            transition={ {
+                duration: 0.2,
+                ease: "easeInOut"
+            } }
+            className={`p-4 flex flex-col justify-between gap-4 border-r border-neutral-300`}>
             <div className="flex-1 flex flex-col justify-between">
                 <ul
                     className="flex flex-col gap-4">
@@ -37,7 +44,7 @@ const Sidebar = () => {
             </div>
                     
             <ToggleClose open={isOpen} setIsOpen={setIsOpen}/>
-        </aside>
+        </motion.aside>
     )
 };
 
@@ -57,14 +64,19 @@ const SidebarOption = ({ open, name, href, icon : Icon, isSelected } : SidebarOp
             <Link
                 href={href}
                 title={!open ? name : undefined}
-                className={`${isSelected ? 'bg-linear-to-b from-brand-50 to-brand-100 text-brand-700' : 'text-neutral-500'} flex items-center gap-4 px-4 py-3 rounded-md transition-colors duration-200 ease-in-out hover:bg-linear-to-b from-brand-50 to-brand-100 hover:text-brand-700`}>
+                className={`${isSelected ? 'bg-linear-to-b from-brand-50 to-brand-100 text-brand-700' : 'text-neutral-500'} flex items-center gap-4 px-4 py-3 rounded-md duration-200 ease-in-out hover:bg-linear-to-b from-brand-50 to-brand-100 hover:text-brand-700 hover:scale-105 transition-all`}>
                 <Icon className="shrink-0"/>
-
-                {
-                    open && (
-                        <span className="text-sm font-medium">{name}</span>
-                    )
-                }
+                <AnimatePresence initial={false}>
+                    {open && (
+                            <motion.span 
+                                initial={{ opacity: 0, width: 0, x: -50 }}
+                                animate={{ opacity: 0.9, width: "auto", x: 0 }}
+                                className="text-sm font-medium"
+                            >
+                                    {name}
+                            </motion.span>
+                    )}
+                </AnimatePresence>
             </Link>
         </li>
     )
