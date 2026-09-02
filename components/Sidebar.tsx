@@ -13,9 +13,7 @@ const Sidebar = () => {
     return (
         <aside
             className={`${isOpen ? 'w-56' : 'w-fit'} p-4 flex flex-col justify-between gap-4 border-r border-neutral-300`}>
-            <div className="flex-1 flex flex-col gap-4">
-                <TitleSection open={isOpen}/>
-
+            <div className="flex-1 flex flex-col">
                 <ul
                     className="flex flex-col gap-4">
                     {
@@ -42,31 +40,6 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
-interface TitleSectionProps {
-    open : boolean;
-}
-
-const TitleSection = ({ open } : TitleSectionProps) => {
-    return (
-        <div
-            className="flex items-center gap-4 pb-4 border-b border-neutral-300">
-            <img
-                src="/pacifico-logo.svg"
-                className="size-14 rounded-md shrink-0 object-cover"
-                alt="Sucursal" />
-
-            {
-                open && (
-                    <div className="flex flex-col">
-                        <p className="text-neutral-500 text-xs font-medium whitespace-nowrap">Sucursal</p>
-                        <p className="text-sm font-semibold whitespace-nowrap">Las Brisas</p>
-                    </div>
-                )
-            }
-        </div>
-    )
-}
 
 interface SidebarOptionProps {
     open : boolean;
