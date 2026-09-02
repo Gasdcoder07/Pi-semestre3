@@ -18,9 +18,9 @@ const page = () => {
 
                 <div className="max-w-md mx-auto h-full flex flex-col justify-center items-center gap-6">
                     <div className="text-center flex flex-col gap-2">
-                        <h3 className="text-3xl font-semibold">Welcome back</h3>
+                        <h3 className="text-3xl font-semibold">Bienvenido de nuevo</h3>
 
-                        <p className="text-sm text-neutral-600 leading-relaxed">Enter your email and password to access your acount.</p>
+                        <p className="text-sm text-neutral-600 leading-relaxed">Ingresa tu correo y contraseña para acceder a tu cuenta.</p>
                     </div>
 
                     <LoginForm/>
@@ -37,7 +37,7 @@ const page = () => {
                     quality={75}/>
 
                 <div className="absolute top-1/2 -translate-y-1/2 left-6 lg:left-12 text-white p-2 flex flex-col gap-2">
-                    <h3 className="text-3xl leading-relaxed">Administra tus ventas e inventario sin esfuerzo.</h3>
+                    <h3 className="text-3xl leading-relaxed">Administra tus ventas e inventario facil.</h3>
 
                     <p className="max-w-2xl leading-relaxed">Inicia sesión para gestionar tus sucursales en tiempo real.</p>
                 </div>
