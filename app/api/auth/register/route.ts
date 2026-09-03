@@ -19,7 +19,6 @@ import { supabase } from "@/lib/supabase";
  *             required:
  *               - nombre
  *               - apellido
- *               - nombre_usuario
  *               - correo
  *               - password
  *               - rol_id
@@ -83,11 +82,11 @@ import { supabase } from "@/lib/supabase";
 export async function POST(request: Request) {
     try {
         const body = await request.json()
-        const { nombre, apellido,nombre_usuario, correo, password, rol_id, sucursal_id } = body;
+        const { nombre, apellido, correo, password, rol_id, sucursal_id } = body;
 
-        if (!nombre || !apellido || !nombre_usuario || !correo || !password || !rol_id){
+        if (!nombre || !apellido || !correo || !password || !rol_id){
             return NextResponse.json(
-                { error: 'Faltan campos obligatorios (nombre, apellido, nombre_usuario, correo, password, rol_id)' },
+                { error: 'Faltan campos obligatorios (nombre, apellido, correo, password, rol_id)' },
                 { status: 400 }
             )
         }
@@ -99,7 +98,6 @@ export async function POST(request: Request) {
                 data: {
                     nombre,
                     apellido,
-                    nombre_usuario,
                     rol_id,
                     sucursal_id: sucursal_id 
                     ? sucursal_id.toString() 

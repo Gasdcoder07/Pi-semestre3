@@ -143,7 +143,7 @@ export async function POST(request: Request) {
         }
         const { data: perfilUsuario, error: perfilError } = await supabase
             .from('usuarios')
-            .select('id, nombre,apellido,nombre_usuario, correo, rol_id, sucursal_id, estado')
+            .select('id, nombre,apellido, correo, rol_id, sucursal_id, estado')
             .eq('auth_user_id', authData.user.id)
             .single();
 

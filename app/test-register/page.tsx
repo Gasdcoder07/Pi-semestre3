@@ -6,7 +6,6 @@ export default function TestRegister() {
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
-    nombre_usuario: "",
     correo: "",
     password: "",
     rol_id: "",
@@ -57,14 +56,6 @@ export default function TestRegister() {
           name="apellido"
           type="text"
           placeholder="Apellido"
-          onChange={handleChange}
-          required
-          className="p-2 border rounded text-black"
-        />
-        <input
-          name="nombre_usuario"
-          type="text"
-          placeholder="Nombre de Usuario"
           onChange={handleChange}
           required
           className="p-2 border rounded text-black"
