@@ -1,7 +1,7 @@
 const Navbar = () => {
     return (
         <nav className="bg-white border-b border-neutral-300">
-            <div className="container mx-auto flex justify-between items-center py-4">
+            <div className="mx-auto flex justify-between items-center py-4 px-6">
                 <div className="flex items-center gap-4">
                     <img
                         src="https://cdn.aglty.io/scotia-bank-mexico/Attachments/NewItems/lomas-palmas-sucursal_20231018233625_0.png"

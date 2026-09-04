@@ -11,6 +11,7 @@ const page = () => {
     return (
         <div className="w-full h-full flex">
             <div className="relative w-full md:w-1/2 p-12">
+
                 <img
                     src="/pacifico-logo-horizontal.svg"
                     alt="Logo Pacífico"
@@ -22,7 +23,6 @@ const page = () => {
 
                         <p className="text-sm text-neutral-600 leading-relaxed">Registrate y crea una cuenta para acceder a tu perfil.</p>
                     </div>
-
                     <LoginForm/>
                 </div>
             </div>
