@@ -20,17 +20,31 @@ import { pool } from "@/lib/db"
  *                 type: object
  *                 properties:
  *                   id:
- *                     type: string
- *                     format: uuid
+ *                     type: number
+ *                     example: 2
  *                   nombre:
  *                     type: string
  *                     example: "Sucursal Centro"
  *                   direccion:
  *                     type: string
  *                     example: "Av. Principal 123"
+ *                   telefono:
+ *                     type: string
+ *                     example: "314 125 7959"
+ *                   info_contacto:
+ *                     type: string
+ *                     example: "Esta es la información de contacto"
  *                   estado:
  *                     type: boolean
  *                     example: true
+ *                   created_at:
+ *                     type: string
+ *                     format: date-time
+ *                     example: "2026-09-04T17:24:00Z"
+ *                   updated_at:
+ *                     type: string
+ *                     format: date-time
+ *                     example: "2026-09-04T17:25:00Z"
  *       500:
  *         description: Internal Server Error. Fallo al consultar la base de datos.
  *         content:
